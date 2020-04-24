@@ -123,7 +123,7 @@ $(document).ready(function() {
     for(let i = 0; i < 4; i++) {
       aRay.push(answerRay[i]);
     }
-    // Black Peg Check
+    // Red Peg Check
     for(let i = 0; i < 4; i++) {
       if(masterGuessArray[guess][i] === aRay[i]) {
         gradRay.push('red-peg');
