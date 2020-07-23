@@ -73,7 +73,7 @@ function start(){
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-function move(id,player,bool,random){
+function move(id,player,bool,random){ //what's the bool for?
     
     player_num = player.match(/\d+/g);
     let c=document.getElementById(id).className;
@@ -88,7 +88,7 @@ function move(id,player,bool,random){
         capture(id,orb_color,player);
         let new_div=document.createElement('div');
 		new_div.setAttribute('id',orb_no);
-		document.getElementById(id).setAttribute('class',player);
+		//document.getElementById(id).setAttribute('class',player); //redundant as capture() already sets class
 		document.getElementById(id).appendChild(new_div);
 		check_split(id,player,false);
 		if(document.getElementById(orb_no))
@@ -110,7 +110,7 @@ function add_orb(id,player){
 	for(let i=-1; i<2;i++)
 		for(let j=-1; j<2;j++)
 			{
-				if(i!=j && (i-j == 1 || i-j ==0 || i-j==-1))
+				if(i!=j && (i-j == 1 || i-j==-1)) // i-j==0 was redundant
 					{
 						if(document.getElementById('r'+(+matches[0]+i) +'c'+ (+matches[1]+j) ))
 						{
@@ -121,6 +121,7 @@ function add_orb(id,player){
 							capture('r'+(+matches[0]+i) +'c'+(+matches[1]+j),orb_color,player);
 							document.getElementById('r'+(+matches[0]+i) +'c'+ (+matches[1]+j) ).appendChild(div);
 							cssMulti(orb_no,{'background':orb_color});
+							check_split(('r'+(+matches[0]+i) +'c'+ (+matches[1]+j) ),player,true);
 						}
 					}
 			}	
@@ -286,13 +287,7 @@ function delete_orbs(id,parentDiv,player){
 	}
 	parentDiv.removeAttribute('class'); 
 	},10);
-	setTimeout(function(){for(let i=0; i<row;i++)
-		for(let j=0; j<col;j++)
-		{
-			check_split('r'+i +'c'+ j,player,true);
-		};},15);
-	
-	}
+ }
 ////////////////////////////////////////////////////////////////////////////////
 function check(count_moves,player){
     for(let row_entry=0; row_entry<row; row_entry++)
@@ -346,4 +341,3 @@ function restart(){
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
