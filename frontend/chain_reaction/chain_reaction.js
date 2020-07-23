@@ -155,8 +155,12 @@ function capture(id,orb_color,capturer){
 		{existing_div.style.background=orb_color;}
 			// player_num = capturer.match(/\d+/g);
 			// score[+player_num[0]]+=5; 
-	document.getElementById(id).className=capturer;
-	check(count_moves,capturer);
+	if(document.getElementById(id))
+	{
+		document.getElementById(id).className=capturer;
+		check(count_moves,capturer);
+	}
+	
 
 	
 }
@@ -166,7 +170,7 @@ function check_split(id,player,bool){
 	if(document.getElementById(id)!=null)
 		{
 			if(id=='r0c0'||id=='r0c'+(col-1)||id=='r'+(row-1)+'c0'||id=='r'+(row-1)+'c'+(col-1)){
-				if(document.getElementById(id).childElementCount>=2)
+				if(document.getElementById(id).childElementCount==2)
 					{
 						split_two(id,player);  
 						// player_num = player.match(/\d+/g);
@@ -174,7 +178,7 @@ function check_split(id,player,bool){
 					}
 				}
 			else if(id.substring(0,2)=='r0'|| id.substring(2,4)=='c0'|| id.substring(0,2)=='r'+(row-1) || id.substring(2,5)=='c'+(col-1)){
-				if( document.getElementById(id).childElementCount>=3)
+				if( document.getElementById(id).childElementCount==3)
 					{ 
 						split_three(id,player);
 						// player_num = player.match(/\d+/g);
@@ -182,7 +186,7 @@ function check_split(id,player,bool){
 					}
 				}
 			else{	
-				if(document.getElementById(id).childElementCount>=4 )
+				if(document.getElementById(id).childElementCount==4 )
 				{
 					split_four(id,player);
 					// player_num = player.match(/\d+/g);
